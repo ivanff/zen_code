@@ -1,11 +1,11 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {GalleryComponent} from './gallery/gallery.component';
-import {AddComponent} from './add/add.component';
+import {AddComponent, CanActivateAuthRequired} from './add/add.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {ReactiveFormsModule} from "@angular/forms";
@@ -15,8 +15,9 @@ import {
   GalleryItemResolver
 } from './gallery-item/gallery-item.component';
 import {ngfModule} from "angular-file";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
+import {AuthService} from "./auth.service";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,12 @@ import {CookieService} from "ngx-cookie-service";
     CookieService,
     GalleryItemResolver,
     GalleryCommentsResolver,
+    CanActivateAuthRequired,
+    {provide: APP_INITIALIZER,
+      useFactory: (auth: AuthService) => () => auth.getUser(),
+      deps: [AuthService, HttpClient],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })

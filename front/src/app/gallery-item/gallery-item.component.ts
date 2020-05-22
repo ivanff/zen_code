@@ -32,6 +32,7 @@ export class GalleryCommentsResolver implements Resolve<Array<IComment>> {
 
 interface IComment {
   id: number;
+  is_owner: boolean;
   user: string;
   content: string;
   created: Date;
@@ -61,7 +62,6 @@ export class GalleryItemComponent implements OnInit, OnDestroy {
     this.commentForm = this.formBuilder.group({
       content: ['', [Validators.required, Validators.maxLength(250)]]
     });
-    this.auth.user = {email: 'test@sdfds', name: ''} as IUser;
     if (!this.auth.user) {
       this.commentForm.disable();
     }
@@ -112,4 +112,20 @@ export class GalleryItemComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  remove(): void {
+    this.http.delete(`${environment.backendGalery}/${this.item.id}/`, this.auth.httpOptions).subscribe(() => {
+      this.router.navigate(['/'], {
+        replaceUrl: true
+      })
+    })
+  }
+
+  removeComment(index): void {
+    const url = `${environment.backendGalery}/${this.item.id}/comment/${this.comments[index].id}/`;
+    this.http.delete(url, this.auth.httpOptions).subscribe(() => {
+      this.comments.splice(index, 1)
+    })
+  }
+
 }

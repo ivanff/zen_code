@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService, IUser} from "../auth.service";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-register',
@@ -10,14 +12,17 @@ import {AuthService, IUser} from "../auth.service";
 })
 export class RegisterComponent implements OnInit {
   regForm;
+  message;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private auth: AuthService) {
+              private auth: AuthService,
+              private http: HttpClient) {
     this.regForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password1: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.maxLength(150)]],
+      email: ['', [Validators.email]],
+      password1: ['', [Validators.required, Validators.maxLength(20)]],
       password2: ['', [Validators.required, RegisterComponent.matchValues('password1'),]],
     })
   }
@@ -25,9 +30,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public static matchValues(
-    matchTo: string // name of the control to match to
-  ): (AbstractControl) => ValidationErrors | null {
+  public static matchValues(matchTo: string): (AbstractControl) => ValidationErrors | null {
     return (control: AbstractControl): ValidationErrors | null => {
       return !!control.parent &&
       !!control.parent.value &&
@@ -39,12 +42,20 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(value): void {
     if (this.regForm.status == 'VALID') {
-      this.regForm.reset();
-      this.auth.setUser({
-        email: value.email,
-        name: ""
-      } as IUser);
-      this.router.navigate(['/']);
+      this.http.post(`${environment.backendGalery}/user/reg/`, value, this.auth.httpOptions).subscribe((value: IUser) => {
+        this.regForm.reset();
+        this.router.navigate(['/']);
+        this.auth.setUser(value)
+      }, (err) => {
+        let message = '';
+        if (err.error instanceof Object) {
+          for (let [key, value] of Object.entries(err.error)) {
+            //@ts-ignore
+            message += value.join(',');
+          }
+        }
+        this.message = message
+      })
     }
   }
 }

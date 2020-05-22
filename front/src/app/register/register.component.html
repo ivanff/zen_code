@@ -1,21 +1,28 @@
+<p *ngIf="message" class="ng-invalid ng-dirty">{{message}}</p>
 <form [formGroup]="regForm" (ngSubmit)="onSubmit(regForm.value)">
+  <div>
+    <label for="username">
+      Логин
+    </label>
+    <input id="username" type="text" formControlName="username" required maxlength="150">
+  </div>
   <div>
     <label for="email">
       Email
     </label>
-    <input id="email" type="email" formControlName="email" required>
+    <input id="email" type="email" formControlName="email" maxlength="254">
   </div>
   <div>
     <label for="password1">
       Пароль
     </label>
-    <input id="password1" type="password" formControlName="password1" required>
+    <input id="password1" type="password" formControlName="password1" required maxlength="20">
   </div>
   <div>
     <label for="password2">
       Повторите пароль
     </label>
-    <input id="password2" type="password" formControlName="password2" required>
+    <input id="password2" type="password" formControlName="password2" required maxlength="20">
   </div>
   <button class="button" type="submit">Зарегистрироваться</button>
 </form>

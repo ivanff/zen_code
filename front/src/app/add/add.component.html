@@ -1,12 +1,25 @@
-<input type="file" accept="image/*" ngf [(files)]="files" multiple="10"/>
+<div *ngIf="uploaded.length" class="container">
+  <h2>Загруженные изображения:</h2>
+  <div *ngFor="let item of uploaded" class="item">
+    <a [routerLink]="['/gallery', item.id]" replaceUrl>
+      <img [src]="item.thumb">
+    </a>
+
+    <span>Название: {{ item.title}}</span>
+    <span>Лайки: {{ item.like_count}}</span>
+    <span>Комменты: {{ item.comment_count}}</span>
+  </div>
+</div>
+
+<input type="file" accept="image/*" ngf [(files)]="files" (init)="init($event)" multiple="10"/>
 
 <div class="container">
   <div *ngFor="let item of files; let i=index" class="item">
     <div *ngIf="['image/gif','image/png','image/jpeg'].indexOf(item.type)>=0">
       <div class="preview" [ngfBackground]="item"></div>
     </div>
-    <input type="text" placeholder="Название">
-    <a [routerLink]="" (click)="files.splice(i,1)">Убрать</a>
+    <input [formControl]="titlesFormArray.at(i)" type="text" placeholder="Название" maxlength="250">
+    <a [routerLink]="" (click)="remove(i)">Убрать</a>
   </div>
 </div>
 
@@ -15,3 +28,12 @@
         [disabled]="!files">
   Загрузить
 </button>
+
+<ngfUploadStatus
+  [(percent)]="uploadPercent"
+  [httpEvent]="httpEvent"
+></ngfUploadStatus>
+
+<div *ngIf="uploadPercent">
+  Upload Progress: {{ uploadPercent }}%
+</div>

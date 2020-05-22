@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService, IUser} from "../auth.service";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -10,13 +12,15 @@ import {AuthService, IUser} from "../auth.service";
 })
 export class LoginComponent implements OnInit {
   loginForm;
+  message;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private auth: AuthService) {
+              private auth: AuthService,
+              private http: HttpClient) {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     })
   }
@@ -26,12 +30,20 @@ export class LoginComponent implements OnInit {
 
   onSubmit(value): void {
     if (this.loginForm.status == 'VALID') {
-      this.loginForm.reset();
-      this.auth.setUser({
-        email: value.email,
-        name: ""
-      } as IUser);
-      this.router.navigate(['/']);
+      this.http.post(`${environment.backendGalery}/user/login/`, value, this.auth.httpOptions).subscribe((user: IUser) => {
+        this.loginForm.reset();
+        this.auth.setUser(user);
+        this.router.navigate(['/']);
+      }, (err) => {
+        let message = '';
+        if (err.error instanceof Object) {
+          for (let [key, value] of Object.entries(err.error)) {
+            //@ts-ignore
+            message += value.join(',');
+          }
+        }
+        this.message = message
+      });
     }
   }
 }

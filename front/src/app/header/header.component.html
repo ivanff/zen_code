@@ -6,5 +6,5 @@
     <a routerLink="/login">Войти</a> |
     <a routerLink="/register">Зарегистрироваться</a>
   </div>
-  <a *ngIf="auth.user" (click)="logout()" href>Выйти</a>
+  <a *ngIf="auth.user" [routerLink]="" (click)="logout()" href>Выйти</a>
 </div>

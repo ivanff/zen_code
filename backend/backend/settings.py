@@ -107,11 +107,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+AUTH_PASSWORD_VALIDATORS = []
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -134,8 +135,13 @@ STATICFILES_DIRS = [
     BASE_DIR + '/static'
 ]
 
-
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:4200',
 ]
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 20
+}

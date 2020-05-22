@@ -1,9 +1,10 @@
+<p *ngIf="message" class="ng-invalid ng-dirty">{{message}}</p>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
   <div>
-    <label for="email">
-      Email
+    <label for="username">
+      Имя пользователя
     </label>
-    <input id="email" type="email" formControlName="email" required>
+    <input id="username" type="email" formControlName="username" required>
   </div>
   <div>
     <label for="password">

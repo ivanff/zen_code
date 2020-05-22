@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  backend: 'http://localhost:8888',
   backendGalery: 'http://localhost:8888/gallery-api'
 };
 

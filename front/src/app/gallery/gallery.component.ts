@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {map} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
+import {AuthService} from "../auth.service";
 
 export interface IGalleryItem {
   id: number;
+  is_owner: boolean;
   user: string;
 
   title: string;
@@ -15,27 +16,37 @@ export interface IGalleryItem {
   comment_count: number;
 }
 
+interface IOffset {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Array<IGalleryItem>;
+}
+
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit {
-  backendUrl = environment.backend;
-  items: Array<IGalleryItem> = [
-    {
-      id: 1,
-      user: 'agestart@gmail.com',
-      title: 'test',
-      image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-      thumb: 'https://clipart.info/images/ccovers/1559064731google-small.png',
-      like_count: 0,
-      comment_count: 1,
-    }
-  ];
+  offset: IOffset;
+  items: Array<IGalleryItem> = [];
 
-  constructor(private http: HttpClient) {
-    this.http.get(`${environment.backendGalery}/list/`).subscribe((value: Array<IGalleryItem>) => this.items = value)
+  constructor(private http: HttpClient, private auth: AuthService) {
+    this.getItems()
+  }
+
+  getItems(url?: string): void {
+    this.http.get(url ? url : `${environment.backendGalery}/list/`).subscribe((value: IOffset) => {
+      this.offset = value;
+      this.items.push(...value.results);
+    })
+  }
+
+  remove(index: number): void {
+    this.http.delete(`${environment.backendGalery}/${this.items[index].id}/`, this.auth.httpOptions).subscribe(() => {
+      this.items.splice(index, 1);
+    })
   }
 
   ngOnInit(): void {

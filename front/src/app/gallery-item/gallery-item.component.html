@@ -4,6 +4,7 @@
   <img [src]="item.image" class="large">
   <span>Автор: {{item.user}}</span>
   <a (click)="like()" [routerLink]="">Нравится: {{ item.like_count}}</a>
+  <a *ngIf="item.is_owner" [routerLink]="" (click)="remove()">Удалить</a>
 </div>
 
 <div>
@@ -17,10 +18,11 @@
     </div>
     <button class="button" type="submit">Сохранить</button>
   </form>
-  <h2>Комментарии ({{item.comment_count}})</h2>
+  <h2>Комментарии ({{comments.length}})</h2>
   <ul>
-    <li *ngFor="let comment of comments">
-      <span>{{comment.user}}</span>, <small>{{comment.created|date}}</small>,
+    <li *ngFor="let comment of comments; let i = index;">
+      <span>{{comment.user}}</span>, <small>{{comment.created|date}}</small>&nbsp;
+      <a *ngIf="item.is_owner" [routerLink]="" (click)="removeComment(i)">Удалить</a>
       <p>
         {{ comment.content }}
       </p>

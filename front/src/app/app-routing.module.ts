@@ -3,7 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {GalleryComponent} from "./gallery/gallery.component";
 import {RegisterComponent} from "./register/register.component";
-import {AddComponent} from "./add/add.component";
+import {AddComponent, CanActivateAuthRequired} from "./add/add.component";
 import {
   GalleryCommentsResolver,
   GalleryItemComponent,
@@ -26,7 +26,8 @@ const routes: Routes = [
   },
   {
     path: 'add',
-    component: AddComponent
+    component: AddComponent,
+    canActivate: [CanActivateAuthRequired]
   },
   {
     path: 'gallery/:id',
