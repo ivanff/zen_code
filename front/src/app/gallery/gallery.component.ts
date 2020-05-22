@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {environment} from "../../environments/environment";
+import {map} from "rxjs/operators";
+import {HttpClient} from "@angular/common/http";
 
 export interface IGalleryItem {
   id: number;
@@ -18,6 +21,7 @@ export interface IGalleryItem {
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit {
+  backendUrl = environment.backend;
   items: Array<IGalleryItem> = [
     {
       id: 1,
@@ -30,7 +34,8 @@ export class GalleryComponent implements OnInit {
     }
   ];
 
-  constructor() {
+  constructor(private http: HttpClient) {
+    this.http.get(`${environment.backendGalery}/list/`).subscribe((value: Array<IGalleryItem>) => this.items = value)
   }
 
   ngOnInit(): void {

@@ -19,6 +19,12 @@
   margin: 5px;
   display: flex;
   flex-flow: column;
+
+  img.large {
+    object-fit: contain;
+    width: 100%;
+    height: 250px;
+  }
 }
 
 .preview {

@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
+import {HttpHeaders} from "@angular/common/http";
+import {CookieService} from "ngx-cookie-service";
 
 export interface IUser {
   email: string;
@@ -11,14 +13,18 @@ export interface IUser {
 })
 export class AuthService {
   user!: IUser | null;
+  user$ = new Subject<IUser | null>();
+  httpOptions = {
+    headers: {
+      "X-CSRFToken": this.cookieService.get('csrftoken')
+    }
+  };
 
-  public user$ = new Subject<IUser | null>();
-
-  constructor() {
+  constructor(private cookieService: CookieService) {
     this.user$.subscribe((value => this.user = value))
   };
 
-  setUser(user: IUser| null): void {
+  setUser(user: IUser | null): void {
     this.user$.next(user)
   }
 

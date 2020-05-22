@@ -16,6 +16,7 @@ import {
 } from './gallery-item/gallery-item.component';
 import {ngfModule} from "angular-file";
 import {HttpClientModule} from "@angular/common/http";
+import {CookieService} from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -32,9 +33,10 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ngfModule
+    ngfModule,
   ],
   providers: [
+    CookieService,
     GalleryItemResolver,
     GalleryCommentsResolver,
   ],

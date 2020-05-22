@@ -1,7 +1,8 @@
 <h1>{{item.title}}</h1>
 
 <div class="item">
-  <img [src]="item.image">
+  <img [src]="item.image" class="large">
+  <span>Автор: {{item.user}}</span>
   <a (click)="like()" [routerLink]="">Нравится: {{ item.like_count}}</a>
 </div>
 
