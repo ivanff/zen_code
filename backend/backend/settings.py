@@ -40,7 +40,6 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'sorl.thumbnail',
-    'corsheaders',
 
     'gallery',
 ]
@@ -48,7 +47,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -86,7 +84,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, '../dbs/db.sqlite3'),
     }
 }
 
@@ -107,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-AUTH_PASSWORD_VALIDATORS = []
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -128,16 +125,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = BASE_DIR + 'files/static'
-MEDIA_ROOT = BASE_DIR + 'files/media'
+STATIC_ROOT = BASE_DIR + '/files/static'
+MEDIA_ROOT = BASE_DIR + '/files/media'
 
 STATICFILES_DIRS = [
     BASE_DIR + '/static'
-]
-
-# CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:4200',
 ]
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000

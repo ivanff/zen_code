@@ -9,6 +9,7 @@ import {
   GalleryItemComponent,
   GalleryItemResolver
 } from "./gallery-item/gallery-item.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 
 const routes: Routes = [
@@ -36,7 +37,9 @@ const routes: Routes = [
       item: GalleryItemResolver,
       comments: GalleryCommentsResolver
     }
-  }
+  },
+  {path: '404', component: NotFoundComponent},
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

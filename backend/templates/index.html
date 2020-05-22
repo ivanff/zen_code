@@ -9,11 +9,18 @@
 </head>
 <body>
 <app-root></app-root>
-<script src="{{ STATIC_URL }}/dist/runtime.js" type="module"></script>
-<script src="{{ STATIC_URL }}/dist/polyfills.js" type="module"></script>
-<script src="{{ STATIC_URL }}/dist/styles.js" type="module"></script>
-<script src="{{ STATIC_URL }}/dist/vendor.js" type="module"></script>
-<script src="{{ STATIC_URL }}/dist/main.js" type="module"></script>
+<script src="{{ STATIC_URL }}dist/runtime-es2015.js" type="module"></script>
+<script src="{{ STATIC_URL }}dist/runtime-es5.js" nomodule defer></script>
+<script src="{{ STATIC_URL }}dist/polyfills-es5.js" nomodule defer></script>
+<script src="{{ STATIC_URL }}dist/polyfills-es2015.js" type="module"></script>
+<script src="{{ STATIC_URL }}dist/styles-es2015.js" type="module"></script>
+<script src="{{ STATIC_URL }}dist/styles-es5.js" nomodule defer></script>
+<script src="{{ STATIC_URL }}dist/vendor-es2015.js" type="module"></script>
+<script src="{{ STATIC_URL }}dist/vendor-es5.js" nomodule defer></script>
+<script src="{{ STATIC_URL }}dist/main-es2015.js" type="module"></script>
+<script src="{{ STATIC_URL }}dist/main-es5.js" nomodule defer></script>
+</body>
+
 {% csrf_token %}
 </body>
 </html>

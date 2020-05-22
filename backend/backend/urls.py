@@ -15,13 +15,17 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.http import Http404
 from django.urls import path, include, re_path
 from django.conf import settings
-from django.views.generic import TemplateView
+from django.views.defaults import page_not_found
+from django.views.generic import TemplateView, RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin', RedirectView.as_view(url='/admin/')),
     path('gallery-api/', include('gallery.urls')),
+    path('404', page_not_found, kwargs={'template_name': 'index.html', 'exception': Http404()}),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
-    re_path('.*', TemplateView.as_view(template_name='index.html')),
+    re_path('', TemplateView.as_view(template_name='index.html')),
 ]

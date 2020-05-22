@@ -1,0 +1,16 @@
+version: '3'
+services:
+  front:
+    build: front/
+    command: ng build --outputPath /front/static/dist
+    volumes:
+      - ./backend/static:/front/static
+  backend:
+    build: backend/
+    command: python -u ./manage.py runserver 0.0.0.0:8889
+    ports:
+      - "8889:8889"
+    volumes:
+      - ./backend/static:/backend/static
+      - ./backend/files:/backend/files
+      - ./dbs:/dbs

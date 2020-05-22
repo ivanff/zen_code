@@ -18,6 +18,7 @@ import {ngfModule} from "angular-file";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {AuthService} from "./auth.service";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {AuthService} from "./auth.service";
     AddComponent,
     LoginComponent,
     RegisterComponent,
-    GalleryItemComponent
+    GalleryItemComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
