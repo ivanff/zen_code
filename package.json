@@ -1,0 +1,24 @@
+{
+  "name": "zen_code",
+  "version": "1.0.0",
+  "description": "test work",
+  "main": "index.js",
+  "dependencies": {
+    "@angular/cli": "^9.1.7",
+    "s": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanff/zen_code.git"
+  },
+  "author": "Ivan Fedoseev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivanff/zen_code/issues"
+  },
+  "homepage": "https://github.com/ivanff/zen_code#readme"
+}
