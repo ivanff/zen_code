@@ -25,5 +25,4 @@
 скрипты js хоть и компилируются при запуске, но тоже из решил добавить,
 так как докер не понимает что копиляция не завершилась, и запускает сервер
 
-docker-compose build
-docker-compose up
+docker-compose build && docker-compose up
