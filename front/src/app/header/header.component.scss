@@ -1,0 +1,11 @@
+.header {
+  width: 100%;
+  top: 0;
+  position: fixed;
+  background: lightblue;
+  display: flex;
+  flex-flow: row;
+  a {
+    padding: 0 5px;
+  }
+}

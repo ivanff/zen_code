@@ -1,1 +1,9 @@
-<p>gallery works!</p>
+<div class="container">
+  <a *ngFor="let item of items"
+     [routerLink]="['gallery', item.id]"
+     class="item">
+    <img [src]="item.thumb">
+    <span>Лайки: {{ item.like_count}}</span>
+    <span>Комменты: {{ item.comment_count}}</span>
+  </a>
+</div>

@@ -1,6 +1,10 @@
-{{ user || "Гость" }},
-<div *ngIf="!user">
-  <a routerLink="/login">Войти</a> |
-  <a routerLink="/register">Зарегистрироваться</a>
+<div class="header">
+  <a routerLink="/">Домой</a>
+  <a routerLink="/add"><b>Добавить картинку</b></a>
+  {{ auth.user?.name || auth.user?.email || "Гость" }},
+  <div *ngIf="!auth.user">
+    <a routerLink="/login">Войти</a> |
+    <a routerLink="/register">Зарегистрироваться</a>
+  </div>
+  <a *ngIf="auth.user" (click)="logout()" href>Выйти</a>
 </div>
-<a *ngIf="user" routerLink="/logout">Выйти</a>

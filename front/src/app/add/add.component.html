@@ -1,1 +1,17 @@
-<p>add works!</p>
+<input type="file" accept="image/*" ngf [(files)]="files" multiple="10"/>
+
+<div class="container">
+  <div *ngFor="let item of files; let i=index" class="item">
+    <div *ngIf="['image/gif','image/png','image/jpeg'].indexOf(item.type)>=0">
+      <div class="preview" [ngfBackground]="item"></div>
+    </div>
+    <input type="text" placeholder="Название">
+    <a [routerLink]="" (click)="files.splice(i,1)">Убрать</a>
+  </div>
+</div>
+
+<button type="button"
+        (click)="uploadFiles()"
+        [disabled]="!files">
+  Загрузить
+</button>

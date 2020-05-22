@@ -7,15 +7,13 @@ import {AuthService, IUser} from "../auth.service";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  user!: IUser | null;
-
-  constructor(private auth: AuthService) {
-    this.auth.user$.subscribe((user: IUser | null) => {
-      this.user = user
-    })
+  constructor(public auth: AuthService) {
   }
 
   ngOnInit(): void {
   }
 
+  logout(): void {
+    this.auth.setUser(null)
+  }
 }

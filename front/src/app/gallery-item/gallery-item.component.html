@@ -1,0 +1,29 @@
+<h1>{{item.title}}</h1>
+
+<div class="item">
+  <img [src]="item.image">
+  <a (click)="like()" [routerLink]="">Нравится: {{ item.like_count}}</a>
+</div>
+
+<div>
+  <h2>Оставьте комментарий</h2>
+  <form [formGroup]="commentForm" (submit)="onSubmit(commentForm.value)">
+    <div>
+      <label for="content">
+        Комментарий
+      </label><br>
+      <textarea id="content" formControlName="content" placeholder="Ваш отзыв"></textarea>
+    </div>
+    <button class="button" type="submit">Сохранить</button>
+  </form>
+  <h2>Комментарии ({{item.comment_count}})</h2>
+  <ul>
+    <li *ngFor="let comment of comments">
+      <span>{{comment.user}}</span>, <small>{{comment.created|date}}</small>,
+      <p>
+        {{ comment.content }}
+      </p>
+      <hr>
+    </li>
+  </ul>
+</div>

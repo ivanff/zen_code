@@ -1,9 +1,14 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {GalleryComponent} from "./gallery/gallery.component";
 import {RegisterComponent} from "./register/register.component";
 import {AddComponent} from "./add/add.component";
+import {
+  GalleryCommentsResolver,
+  GalleryItemComponent,
+  GalleryItemResolver
+} from "./gallery-item/gallery-item.component";
 
 
 const routes: Routes = [
@@ -22,6 +27,14 @@ const routes: Routes = [
   {
     path: 'add',
     component: AddComponent
+  },
+  {
+    path: 'gallery/:id',
+    component: GalleryItemComponent,
+    resolve: {
+      item: GalleryItemResolver,
+      comments: GalleryCommentsResolver
+    }
   }
 ];
 
@@ -29,4 +42,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

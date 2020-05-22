@@ -10,13 +10,19 @@ export interface IUser {
   providedIn: 'root'
 })
 export class AuthService {
-  private user!: IUser | null;
+  user!: IUser | null;
 
-  user$ = new Subject();
+  public user$ = new Subject<IUser | null>();
 
-  constructor() { };
+  constructor() {
+    this.user$.subscribe((value => this.user = value))
+  };
 
-  setUser(user: IUser): void {
+  setUser(user: IUser| null): void {
     this.user$.next(user)
+  }
+
+  getUserName(): string {
+    return this.user.name || this.user.email
   }
 }

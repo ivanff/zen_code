@@ -2,3 +2,28 @@
 .ng-invalid:not(form).ng-dirty {
   color: red
 }
+
+.app {
+  margin-top: 70px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  justify-content: flex-start;
+}
+
+.item {
+  border: 1px solid gray;
+  margin: 5px;
+  display: flex;
+  flex-flow: column;
+}
+
+.preview {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
