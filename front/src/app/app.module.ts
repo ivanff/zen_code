@@ -20,6 +20,7 @@ import {CookieService} from "ngx-cookie-service";
 import {AuthService} from "./auth.service";
 import {NotFoundComponent} from './not-found/not-found.component';
 import {APP_BASE_HREF} from "@angular/common";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import {APP_BASE_HREF} from "@angular/common";
     CanActivateAuthRequired,
     {
       provide: APP_BASE_HREF,
-      useValue: '/'
+      useValue: environment.baseHref
     },
     {
       provide: APP_INITIALIZER,
