@@ -1,4 +1,5 @@
 <p *ngIf="message" class="ng-invalid ng-dirty">{{message}}</p>
+<h1>Регистрация</h1>
 <form [formGroup]="regForm" (ngSubmit)="onSubmit(regForm.value)">
   <div>
     <label for="username">

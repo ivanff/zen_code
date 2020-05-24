@@ -1,10 +1,15 @@
 <div class="header">
-  <a routerLink="/">Домой</a>
-  <a routerLink="/add"><b>Добавить картинку</b></a>
-  {{ auth.user?.name || auth.user?.email || "Гость" }},
-  <div *ngIf="!auth.user">
-    <a routerLink="/login">Войти</a> |
-    <a routerLink="/register">Зарегистрироваться</a>
+  <div class="left">
+    <a routerLink="/">Домой</a>
+    <a routerLink="/add"><b>Добавить картинку</b></a>
   </div>
-  <a *ngIf="auth.user" [routerLink]="" (click)="logout()" href>Выйти</a>
+  <div class="right">
+    {{ auth.user?.name || auth.user?.email || "Гость" }},
+    <span *ngIf="!auth.user">
+      <a routerLink="/login">Войти</a> |
+      <a routerLink="/register">Зарегистрироваться</a>
+    </span>
+    <a *ngIf="auth.user" [routerLink]="" (click)="logout()" href>Выйти</a>,
+    <a href="https://github.com/ivanff/zen_code">github</a>
+  </div>
 </div>

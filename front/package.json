@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build_prod": "ng build --outputPath ../backend/static/dist-min --output-hashing none --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -5,7 +5,17 @@
   background: lightblue;
   display: flex;
   flex-flow: row;
+  justify-content: space-between;
+  margin: 0 -8px;
+  padding: 10px;
+  box-sizing: border-box;
   a {
     padding: 0 5px;
+  }
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
   }
 }

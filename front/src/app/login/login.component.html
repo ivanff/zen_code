@@ -1,4 +1,7 @@
 <p *ngIf="message" class="ng-invalid ng-dirty">{{message}}</p>
+<h1>
+  Вход
+</h1>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
   <div>
     <label for="username">
