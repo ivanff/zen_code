@@ -1,5 +1,7 @@
+const baseHref = '/zen_code/';
+
 export const environment = {
-  baseHref: '/zen_code/',
+  baseHref: baseHref,
   production: true,
-  backendGalery: '/gallery-api'
+  backendGalery: `${baseHref}gallery-api`
 };
