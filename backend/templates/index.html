@@ -25,8 +25,11 @@
 	<script src="{{ STATIC_URL }}dist/main-es5.js" nomodule defer></script>
 {% else %}
 	<script src="{{ STATIC_URL }}dist-min/runtime-es2015.js" type="module"></script>
+	<script src="{{ STATIC_URL }}dist-min/runtime-es5.js" nomodule defer></script>
+	<script src="{{ STATIC_URL }}dist-min/polyfills-es5.js" nomodule defer></script>
 	<script src="{{ STATIC_URL }}dist-min/polyfills-es2015.js" type="module"></script>
 	<script src="{{ STATIC_URL }}dist-min/main-es2015.js" type="module"></script>
+	<script src="{{ STATIC_URL }}dist-min/main-es5.js" nomodule defer></script>
 {% endif %}
 </body>
 
