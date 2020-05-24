@@ -18,7 +18,8 @@ import {ngfModule} from "angular-file";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {AuthService} from "./auth.service";
-import { NotFoundComponent } from './not-found/not-found.component';
+import {NotFoundComponent} from './not-found/not-found.component';
+import {APP_BASE_HREF} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
     GalleryItemResolver,
     GalleryCommentsResolver,
     CanActivateAuthRequired,
-    {provide: APP_INITIALIZER,
+    {
+      provide: APP_BASE_HREF,
+      useValue: '/'
+    },
+    {
+      provide: APP_INITIALIZER,
       useFactory: (auth: AuthService) => () => auth.getUser(),
       deps: [AuthService, HttpClient],
       multi: true

@@ -6,19 +6,28 @@
 	<base href="/">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}/dist/favicon.ico">
+	{% if not debug %}
+		<link rel="stylesheet" href="{{ STATIC_URL }}dist-min/styles.css">
+	{% endif %}
 </head>
 <body>
 <app-root></app-root>
-<script src="{{ STATIC_URL }}dist/runtime-es2015.js" type="module"></script>
-<script src="{{ STATIC_URL }}dist/runtime-es5.js" nomodule defer></script>
-<script src="{{ STATIC_URL }}dist/polyfills-es5.js" nomodule defer></script>
-<script src="{{ STATIC_URL }}dist/polyfills-es2015.js" type="module"></script>
-<script src="{{ STATIC_URL }}dist/styles-es2015.js" type="module"></script>
-<script src="{{ STATIC_URL }}dist/styles-es5.js" nomodule defer></script>
-<script src="{{ STATIC_URL }}dist/vendor-es2015.js" type="module"></script>
-<script src="{{ STATIC_URL }}dist/vendor-es5.js" nomodule defer></script>
-<script src="{{ STATIC_URL }}dist/main-es2015.js" type="module"></script>
-<script src="{{ STATIC_URL }}dist/main-es5.js" nomodule defer></script>
+{% if debug %}
+	<script src="{{ STATIC_URL }}dist/runtime-es2015.js" type="module"></script>
+	<script src="{{ STATIC_URL }}dist/runtime-es5.js" nomodule defer></script>
+	<script src="{{ STATIC_URL }}dist/polyfills-es5.js" nomodule defer></script>
+	<script src="{{ STATIC_URL }}dist/polyfills-es2015.js" type="module"></script>
+	<script src="{{ STATIC_URL }}dist/styles-es2015.js" type="module"></script>
+	<script src="{{ STATIC_URL }}dist/styles-es5.js" nomodule defer></script>
+	<script src="{{ STATIC_URL }}dist/vendor-es2015.js" type="module"></script>
+	<script src="{{ STATIC_URL }}dist/vendor-es5.js" nomodule defer></script>
+	<script src="{{ STATIC_URL }}dist/main-es2015.js" type="module"></script>
+	<script src="{{ STATIC_URL }}dist/main-es5.js" nomodule defer></script>
+{% else %}
+	<script src="{{ STATIC_URL }}dist-min/runtime-es2015.js" type="module"></script>
+	<script src="{{ STATIC_URL }}dist-min/polyfills-es2015.js" type="module"></script>
+	<script src="{{ STATIC_URL }}dist-min/main-es2015.js" type="module"></script>
+{% endif %}
 </body>
 
 {% csrf_token %}
