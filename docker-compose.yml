@@ -2,7 +2,7 @@ version: '3'
 services:
   front:
     build: front/
-    command: ng build --outputPath /front/static/dist
+    command: ng build --watch --outputPath /front/static/dist
     volumes:
       - ./backend/static:/front/static
   backend:
